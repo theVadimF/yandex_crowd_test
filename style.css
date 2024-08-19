@@ -1,0 +1,53 @@
+:root {
+  --paper-bg: url('./img/paper_full.png')
+}
+
+.participants {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+}
+
+.participants .page_ctl_wrap {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.participants .participant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: calc(100% / 3);
+}
+
+.participants .participant .photo_outer {
+  aspect-ratio: 1/1;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 100%;
+  background: var(--paper-bg, url('./img/paper_full.png'));
+  background-position: center;
+  overflow: hidden;
+}
+
+.participants .participant .photo {
+  width: 100%;
+  padding: 21px 13px;
+  padding-bottom: 0;
+  box-sizing: border-box;
+}
+
+.participants .slider_outer {
+  width: 100%;
+  overflow-x: hidden;
+  grid-column: 1/3;
+}
+
+.participants .slider {
+  display: flex;
+  transition: transform 0.3s;
+}
+
+

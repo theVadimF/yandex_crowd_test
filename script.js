@@ -35,7 +35,7 @@ const init_participants = () => {
         per_page_amount = per_page_updated;
         page_count = Math.ceil(el_count / per_page_amount);
         el.querySelector(".counter .total").textContent = page_count;
-        // Go to first page if current page is more that page count after resize
+        // Go to first page if current page is more that total page count after resize
         if (parseInt(slider_el.dataset.current) > page_count) {
           slider_el.dataset.current = 1;
           slider_el.style.transform = `none`;

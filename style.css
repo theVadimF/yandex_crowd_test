@@ -1,5 +1,7 @@
 :root {
-  --paper-bg: url('./img/paper_full.png')
+  --paper-bg: url('./img/paper.jpg');
+  --blue: #3057A2;
+  --yellow: #FBCE51;
 }
 
 @font-face {
@@ -28,6 +30,7 @@
   font-size: 54px;
   font-weight: 400;
   line-height: 64.8px;
+  text-transform: uppercase;
 }
 
 .participants {
@@ -73,8 +76,8 @@
   font-weight: 500;
   line-height: 19.2px;
   text-align: center;
-  border: 1px solid #3057A2;
-  color: #3057A2;
+  border: 1px solid var(--blue, #3057A2);
+  color: var(--blue, #3057A2);
   border-radius: 62px;
   padding: 7px 12px;
   margin-top: auto;
@@ -82,7 +85,7 @@
 }
 
 .participants .learn_more:hover {
-  background-color: #3057A2;
+  background-color: var(--blue, #3057A2);
   color: #fff;
 }
 
@@ -106,7 +109,7 @@
 }
 
 .page_ctl:hover circle {
-  fill: #FBCE51;
+  fill: var(--yellow, #FBCE51);
 }
 
 
@@ -158,4 +161,87 @@
   .participants .participant {
     width: 100%;
   } 
+}
+
+.transform_stages .heading_sub_inline {
+  font-family: Golos Text;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--blue, #3057A2);
+}
+
+.transform_stages .inline {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.transform_stages .cards {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  position: relative;
+  margin-top: 54px;
+}
+
+.transform_stages .card {
+  background: var(--paper-bg, url('./img/paper.jpg'));
+  background-position: center;
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+}
+
+.transform_stages .card .number {
+  aspect-ratio: 1/1;
+  height: 36px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Golos Text;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.transform_stages .card .text {
+  font-family: Golos Text;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+}
+
+.transform_stages .card.__tall {
+  grid-row: 1/3;
+  grid-column: 3;
+}
+
+.transform_stages .card.__wide {
+  grid-column: 2/4;
+}
+
+.transform_stages .card.__wide {
+  padding-right: 290px;
+}
+
+.transform_stages .double_card {
+  display: flex;
+  gap: 20px;
+  grid-column: 1/3;
+  width: 100%;
+}
+
+.transform_stages .cards .plane {
+  position: absolute;
+  bottom: 25px;
+  right: -62px;
+  width: 376.64px;
+  height: 140.42px;
+  transform: rotate(-15.31deg);
 }

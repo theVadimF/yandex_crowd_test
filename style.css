@@ -101,14 +101,14 @@
 }
 
 .page_ctl:disabled circle {
-  color: #D6D6D6;
+  fill: #D6D6D6;
 }
 
 .page_ctl circle {
   transition: fill 0.2s;
 }
 
-.page_ctl:hover circle {
+.page_ctl:hover:not(:disabled) circle {
   fill: var(--yellow, #FBCE51);
 }
 
@@ -177,12 +177,21 @@
   gap: 22px;
 }
 
+.transform_stages .cards_outer {
+  position: relative;
+  overflow-x: hidden;
+}
+
 .transform_stages .cards {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(3, 1fr);
   position: relative;
   margin-top: 54px;
+}
+
+.transform_stages .cards.__no_animate {
+  transition: none;
 }
 
 .transform_stages .card {
@@ -227,7 +236,7 @@
 }
 
 .transform_stages .card.__wide {
-  padding-right: 290px;
+  padding-right: 320px;
 }
 
 .transform_stages .double_card {
@@ -237,11 +246,95 @@
   width: 100%;
 }
 
-.transform_stages .cards .plane {
+.transform_stages .plane {
   position: absolute;
-  bottom: 25px;
-  right: -62px;
+  bottom: 43px;
+  right: -58px;
   width: 376.64px;
   height: 140.42px;
   transform: rotate(-15.31deg);
+}
+
+.transform_stages .mobile_ctl {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.transform_stages .mobile_ctl .circles {
+  display: flex;
+  gap: 6px;
+}
+
+.transform_stages .mobile_ctl .circles .circle {
+  display: flex;
+  aspect-ratio: 1/1;
+  width: 10px;
+  flex-shrink: 0;
+  background-color: #D9D9D9;
+  border-radius: 100%;
+  transition: background-color 0.2s;
+}
+
+.transform_stages .mobile_ctl .circles .circle.__active {
+  background-color: #313131;
+}
+
+@media screen and (max-width: 920px) {
+  .transform_stages .cards {
+    display: flex;
+    gap: 40px;
+    margin-top: 148px;
+    transition: transform 0.3s;
+  }
+
+  .transform_stages .cards .card {
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .transform_stages .cards .card, 
+  .transform_stages .double_card {
+    padding: 62px 24px 34px 20px;
+    min-height: 300px;
+  }
+
+  .transform_stages .double_card {
+    flex-direction: column;
+    background: var(--paper-bg);
+    background-position: center;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .transform_stages .double_card .card {
+    background: none;
+    padding: 0;
+    min-height: unset;
+  }
+
+  .transform_stages .plane {
+    bottom: unset;
+    right: 50%;
+    top: 55.03px;
+    width: 318.76px;
+    height: 118.84px;
+    transform: translateX(50%) rotate(-18.73deg); 
+  }
+
+  .transform_stages .inline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .transform_stages .heading_sub_inline br {
+    display: none;
+  }
+
+  .transform_stages .mobile_ctl {
+    display: flex;
+  }
 }

@@ -27,21 +27,21 @@ const init_participants = () => {
     let first_elements = [];
     let last_elements = [];
 
-    for (let i = amount - 1; i >= 0; --i) {
+    for (let i = 0; i < amount; ++i) {
       first_elements.push(elements.item(i).cloneNode(true));
     }
 
-    for (let i = element_count - amount; i < element_count; ++i) {
+    for (let i = element_count - 1; i >= element_count - amount; --i) {
       last_elements.push(elements.item(i).cloneNode(true));
     }
 
     first_elements.forEach((element) => {
       element.classList.add('__duplicate');
-      slider_el.prepend(element);
+      slider_el.append(element);
     })
     last_elements.forEach((element) => {
       element.classList.add('__duplicate');
-      slider_el.appendChild(element);
+      slider_el.prepend(element);
     })
   }
 
@@ -50,7 +50,6 @@ const init_participants = () => {
     const el_count = slider_el.childElementCount;
     const duplicate_amount = 3;
     let per_page_amount = get_per_page_amount();
-    // let page_count = Math.ceil(el_count / per_page_amount);
     let btn_lockout = false;
     el.querySelector(".counter .total").textContent = el_count;
 
@@ -63,8 +62,6 @@ const init_participants = () => {
     setTimeout(() => {
       slider_el.classList.remove("__no_animate");
     }, 0)
-
-    //TODO(vf) Make it auto scroll
 
     addEventListener("resize", () => {
       const per_page_updated = get_per_page_amount();
@@ -102,21 +99,9 @@ const init_participants = () => {
       }, 0)
     }
 
-    el.querySelector(".page_ctl.__prev").addEventListener("click", () => {
-      if (!btn_lockout) {
-        let curret_page = parseInt(slider_el.dataset.current) - 1;
-        update_slider_pos(current_page);
-        if (current_page < -per_page_amount + 2) {
-          btn_lockout = true;
-          slider_el.addEventListener('transitionend', () => {
-            reset_position(el_count - per_page_amount + 1);
-            btn_lockout = false;
-          }, {once: true})
-        }
-      }
-    })
 
-    el.querySelector(".page_ctl.__next").addEventListener("click", () => {
+    const goto_next_page = () => {
+      console
       if (!btn_lockout) {
         let current_page = parseInt(slider_el.dataset.current) + 1;
         update_slider_pos(current_page);
@@ -128,6 +113,34 @@ const init_participants = () => {
           }, {once: true})
         }
       }
+    }
+
+    const init_timer = () => {
+      return setInterval(goto_next_page, 4000);
+    }
+
+    let slider_timer = init_timer();
+
+    el.querySelector(".page_ctl.__prev").addEventListener("click", () => {
+      if (!btn_lockout) {
+        clearInterval(slider_timer);
+        let current_page = parseInt(slider_el.dataset.current) - 1;
+        update_slider_pos(current_page);
+        if (current_page < -per_page_amount + 2) {
+          btn_lockout = true;
+          slider_el.addEventListener('transitionend', () => {
+            reset_position(el_count - per_page_amount + 1);
+            btn_lockout = false;
+          }, {once: true})
+        }
+        slider_timer = init_timer();
+      }
+    })
+
+    el.querySelector(".page_ctl.__next").addEventListener("click", () => {
+      clearInterval(slider_timer);
+      goto_next_page();
+      slider_timer = init_timer()
     })
   })
 }

@@ -25,6 +25,15 @@
   font-style: normal;
 }
 
+.content-wrap {
+  /* max-width: 1222px; */
+  max-width: 1440px;
+  padding-left: 72px;
+  padding-right: 72px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .subheading {
   font-family: Merriweather;
   font-size: 54px;
@@ -36,6 +45,7 @@
 .participants {
   display: grid;
   grid-template-columns: 1fr 160px;
+  margin-top: 200px;
 }
 
 .participants .counter {
@@ -43,8 +53,9 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 19.2px;
-  text-align: left;
   color: #838383;
+  min-width: 35px;
+  text-align: center;
 }
 
 .participants .counter .current {
@@ -144,6 +155,29 @@
   overflow-x: hidden;
   grid-column: 1/3;
   margin-top: 60px;
+  position: relative;
+}
+
+.participants .slider_outer::before,
+.participants .slider_outer::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 20px;
+  z-index: 1;
+  top: 0;
+}
+
+.participants .slider_outer::before {
+  left: 0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+
+.participants .slider_outer::after {
+  right: 0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
 }
 
 .participants .slider {
@@ -159,6 +193,24 @@
   .participants .participant {
     width: calc(100% / 2);
   } 
+}
+
+@media screen and (max-width: 980px) {
+  .participants .subheading {
+    grid-column: 1/3;
+  }
+
+  .participants .page_ctl_wrap {
+    grid-column: 1/3;
+    grid-row: 3;
+    margin-left: unset;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .participants .slider_outer {
+    margin-top: 40px;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -183,7 +235,6 @@
 
 .transform_stages .cards_outer {
   position: relative;
-  overflow-y: hidden;
 }
 
 .transform_stages .cards {
@@ -286,7 +337,7 @@
   background-color: #313131;
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 1060px) {
   .transform_stages .cards {
     display: flex;
     gap: 40px;
@@ -344,5 +395,17 @@
 
   .transform_stages .mobile_ctl {
     display: flex;
+  }
+}
+
+@media (max-width: 850px) {
+  .content-wrap {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .subheading {
+    font-size: 36px;
+    line-height: 39.6px;
   }
 }

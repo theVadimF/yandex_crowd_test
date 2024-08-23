@@ -50,14 +50,16 @@ const init_participants = () => {
     const el_count = slider_el.childElementCount;
     const duplicate_amount = 3;
     let per_page_amount = get_per_page_amount();
-    let page_count = Math.ceil(el_count / per_page_amount);
+    // let page_count = Math.ceil(el_count / per_page_amount);
+    let btn_lockout = false;
     el.querySelector(".counter .total").textContent = el_count;
 
     generate_duplicates(slider_el, duplicate_amount);
 
     slider_el.style.transform =
-      `translateX(calc((-100%/${get_per_page_amount()}) *
+      `translateX(calc((-100%/${per_page_amount}) *
       ${duplicate_amount})`;
+
     setTimeout(() => {
       slider_el.classList.remove("__no_animate");
     }, 0)
@@ -82,27 +84,50 @@ const init_participants = () => {
       slider_el.style.transform =
         `translateX(calc((-100%/${get_per_page_amount()}) *
         ${current_page - 1 + duplicate_amount})`;
-      el.querySelector(".counter .current").textContent = current_page;
+
+      if (current_page < 1) {
+        el.querySelector(".counter .current").textContent = el_count + current_page;
+      } else if (current_page <= el_count) {
+        el.querySelector(".counter .current").textContent = current_page;
+      } else {
+        el.querySelector(".counter .current").textContent = 1;
+      }
+    }
+
+    const reset_position = (index) => {
+      slider_el.classList.add('__no_animate');
+      update_slider_pos(index);
+      setTimeout(() => {
+        slider_el.classList.remove('__no_animate');
+      }, 0)
     }
 
     el.querySelector(".page_ctl.__prev").addEventListener("click", () => {
-      let current_page = parseInt(slider_el.dataset.current);
-      if (current_page > 1) {
-        current_page -= 1;
-      } else {
-        current_page = page_count;
+      if (!btn_lockout) {
+        let curret_page = parseInt(slider_el.dataset.current) - 1;
+        update_slider_pos(current_page);
+        if (current_page < -per_page_amount + 2) {
+          btn_lockout = true;
+          slider_el.addEventListener('transitionend', () => {
+            reset_position(el_count - per_page_amount + 1);
+            btn_lockout = false;
+          }, {once: true})
+        }
       }
-      update_slider_pos(current_page);
     })
 
     el.querySelector(".page_ctl.__next").addEventListener("click", () => {
-      let current_page = parseInt(slider_el.dataset.current);
-      if (current_page < el_count) {
-        current_page += 1;
-      } else {
-        current_page = 1;
+      if (!btn_lockout) {
+        let current_page = parseInt(slider_el.dataset.current) + 1;
+        update_slider_pos(current_page);
+        if (current_page > el_count) {
+          btn_lockout = true;
+          slider_el.addEventListener('transitionend', () => {
+            reset_position(1);
+            btn_lockout = false;
+          }, {once: true})
+        }
       }
-      update_slider_pos(current_page);
     })
   })
 }
@@ -173,8 +198,8 @@ const init_transform_stages = () => {
     generate_dots(card_count, circles, cards, prev_btn, next_btn);
     check_mobile(cards);
 
-    // Prevent firefox from keeping button status after reload
-    next_btn.disabled = false;
+    // Prevent firefox from keeping button state after reload
+    // next_btn.disabled = false;
     prev_btn.disabled = true;
 
     next_btn.addEventListener("click", () => {

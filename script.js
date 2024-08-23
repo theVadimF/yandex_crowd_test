@@ -12,9 +12,9 @@ const init_participants = () => {
     
     // These values must match the CSS rules
     // TODO(vf): set propper page width values
-    if (page_width >= 1200) {
+    if (page_width > 1200) {
       return 3;
-    } else if (page_width >= 700) {
+    } else if (page_width > 700) {
       return 2;
     } else {
       return 1;
@@ -37,10 +37,12 @@ const init_participants = () => {
 
     first_elements.forEach((element) => {
       element.classList.add('__duplicate');
+      element.setAttribute('aria-hidden', 'true');
       slider_el.append(element);
     })
     last_elements.forEach((element) => {
       element.classList.add('__duplicate');
+      element.setAttribute('aria-hidden', 'true');
       slider_el.prepend(element);
     })
   }
@@ -186,7 +188,8 @@ const init_transform_stages = () => {
 
   const check_mobile = (cards) => {
     const is_slider = cards.dataset.isslider;
-    if (window.innerWidth < 920) {
+    // Value needs to match css
+    if (window.innerWidth <= 1060) {
       if (is_slider != "1") {
         cards.dataset.isslider = 1;
         cards.classList.add('__no_animate');
@@ -197,8 +200,12 @@ const init_transform_stages = () => {
         }, 0)
       }
     } else if (is_slider != "0") {
+      cards.classList.add('__no_animate');
       cards.dataset.isslider = 0;
       cards.style.transform = "none";
+      setTimeout(() => {
+        cards.classList.remove("__no_animate");
+      }, 0)
     }
   }
 

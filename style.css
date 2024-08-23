@@ -464,18 +464,14 @@
 }
 
 .top_banner {
-  /* background-image: url("./img/top_banner.webp"); */
   min-height: 700px;
   background-color: var(--beige, #E9DED4);
   position: relative;
   overflow: hidden;
-  /* background-size: 1920px 700px; */
-  /* background-repeat: no-repeat; */
-  /* background-position: center; */
 }
 
 .top_banner .background {
-  --width: 1920px;
+  --width: 1627px;
   min-width: var(--width);
   overflow: hidden;
 }
@@ -485,9 +481,10 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
+  width: var(--width);
+  object-position: bottom center;
   min-width: var(--width);
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .top_banner .texture {

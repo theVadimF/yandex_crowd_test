@@ -499,6 +499,25 @@
   width: 100%;
 }
 
+.top_banner .background .chess_piece {
+  position: absolute;
+  right: 50%;
+  bottom: 19.58px;
+  transform: translateX(calc(50% + 590px));
+  z-index: 2;
+}
+
+.top_banner .background .horse {
+  position: absolute;
+  right: 50%;
+  bottom: -38.64px;
+  transform: translateX(calc(50% + 230px)) rotate(-10.59deg);
+  z-index: 2;
+}
+
+.top_banner .background .chess_piece {
+}
+
 @media (max-width: 850px) {
   .content-wrap {
     padding-left: 20px;

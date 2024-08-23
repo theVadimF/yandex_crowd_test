@@ -21,34 +21,67 @@ const init_participants = () => {
     }
   }
 
+  const generate_duplicates = (slider_el, amount) => {
+    const elements = slider_el.children;
+    const element_count = slider_el.childElementCount;
+    let first_elements = [];
+    let last_elements = [];
+
+    for (let i = amount - 1; i >= 0; --i) {
+      first_elements.push(elements.item(i).cloneNode(true));
+    }
+
+    for (let i = element_count - amount; i < element_count; ++i) {
+      last_elements.push(elements.item(i).cloneNode(true));
+    }
+
+    first_elements.forEach((element) => {
+      element.classList.add('__duplicate');
+      slider_el.prepend(element);
+    })
+    last_elements.forEach((element) => {
+      element.classList.add('__duplicate');
+      slider_el.appendChild(element);
+    })
+  }
 
   document.querySelectorAll(".participants").forEach((el) => {
     const slider_el = el.querySelector(".slider")
     const el_count = slider_el.childElementCount;
+    const duplicate_amount = 3;
     let per_page_amount = get_per_page_amount();
     let page_count = Math.ceil(el_count / per_page_amount);
-    el.querySelector(".counter .total").textContent = page_count;
+    el.querySelector(".counter .total").textContent = el_count;
+
+    generate_duplicates(slider_el, duplicate_amount);
+
+    slider_el.style.transform =
+      `translateX(calc((-100%/${get_per_page_amount()}) *
+      ${duplicate_amount})`;
+    setTimeout(() => {
+      slider_el.classList.remove("__no_animate");
+    }, 0)
 
     //TODO(vf) Make it auto scroll
 
     addEventListener("resize", () => {
       const per_page_updated = get_per_page_amount();
+      const current_page = parseInt(slider_el.dataset.current);
       if (per_page_amount != per_page_updated) {
         per_page_amount = per_page_updated;
-        page_count = Math.ceil(el_count / per_page_amount);
-        el.querySelector(".counter .total").textContent = page_count;
-        // Go to first page if current page is more that total page count after resize
-        if (parseInt(slider_el.dataset.current) > page_count) {
-          slider_el.dataset.current = 1;
-          slider_el.style.transform = `none`;
-          el.querySelector(".counter .current").textContent = 1;
-        }
+        slider_el.classList.add("__no_animate");
+        update_slider_pos(current_page);
+        setTimeout(() => {
+          slider_el.classList.remove("__no_animate");
+        }, 0)
       }
     });
 
     const update_slider_pos = (current_page) => {
       slider_el.dataset.current = current_page;
-      slider_el.style.transform = `translateX(calc(-100% * ${current_page - 1})`;
+      slider_el.style.transform =
+        `translateX(calc((-100%/${get_per_page_amount()}) *
+        ${current_page - 1 + duplicate_amount})`;
       el.querySelector(".counter .current").textContent = current_page;
     }
 
@@ -64,7 +97,7 @@ const init_participants = () => {
 
     el.querySelector(".page_ctl.__next").addEventListener("click", () => {
       let current_page = parseInt(slider_el.dataset.current);
-      if (current_page < page_count) {
+      if (current_page < el_count) {
         current_page += 1;
       } else {
         current_page = 1;
@@ -75,7 +108,6 @@ const init_participants = () => {
 }
 
 const init_transform_stages = () => {
-  // TODO(vf) make circles clickable
   const create_circle = (id, circles, cards, prev_btn, next_btn, amount) => {
     const circle = document.createElement("button");
     circle.classList.add("circle"); 
@@ -119,10 +151,12 @@ const init_transform_stages = () => {
     if (window.innerWidth < 920) {
       if (is_slider != "1") {
         cards.dataset.isslider = 1;
-        // cards.classList.add('__no_animate');
+        cards.classList.add('__no_animate');
         cards.style.transform = 
           `translateX(calc((-100% - 40px)*${cards.dataset.current}))`;
-        // cards.classList.remove('__no_animate');
+        setTimeout(() => {
+          cards.classList.remove("__no_animate");
+        }, 0)
       }
     } else if (is_slider != "0") {
       cards.dataset.isslider = 0;

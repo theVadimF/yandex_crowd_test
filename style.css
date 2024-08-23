@@ -151,6 +151,10 @@
   transition: transform 0.3s;
 }
 
+.participants .slider.__no_animate {
+  transition: none;
+}
+
 @media screen and (max-width: 1200px){
   .participants .participant {
     width: calc(100% / 2);
@@ -179,7 +183,7 @@
 
 .transform_stages .cards_outer {
   position: relative;
-  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .transform_stages .cards {
@@ -288,6 +292,10 @@
     gap: 40px;
     margin-top: 148px;
     transition: transform 0.3s;
+  }
+
+  .transform_stages .cards_outer {
+    overflow: hidden;
   }
 
   .transform_stages .cards .card {

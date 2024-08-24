@@ -33,6 +33,7 @@
   padding-right: 72px;
   margin-left: auto;
   margin-right: auto;
+  box-sizing: content-box;
 }
 
 .outer-wrap {
@@ -470,6 +471,11 @@
   overflow: hidden;
 }
 
+.top_banner .content {
+  position: relative;
+  z-index: 2;
+}
+
 .top_banner .background {
   --width: 1627px;
   min-width: var(--width);
@@ -480,7 +486,7 @@
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(calc(-50% + 23px));
   width: var(--width);
   object-position: bottom center;
   min-width: var(--width);
@@ -503,7 +509,7 @@
   position: absolute;
   right: 50%;
   bottom: 19.58px;
-  transform: translateX(calc(50% + 590px));
+  transform: translateX(calc(50% + 613px));
   z-index: 2;
 }
 
@@ -511,11 +517,114 @@
   position: absolute;
   right: 50%;
   bottom: -38.64px;
-  transform: translateX(calc(50% + 230px)) rotate(-10.59deg);
+  transform: translateX(calc(50% + 253px)) rotate(-10.59deg);
   z-index: 2;
 }
 
-.top_banner .background .chess_piece {
+@media screen and (max-width: 1400px) {
+  .top_banner .city { 
+    left: -100px;
+    transform: none;
+  }
+
+  .top_banner .background .chess_piece {
+    transform: translateX(0);
+    left: 1260px;
+    right: unset;
+  }
+
+  .top_banner .background .horse {
+    /* transform: none; */
+    left: 530px;
+  }
+}
+
+.top_banner .logo_wrap {
+  display: flex;
+  align-items: center;
+  gap: 6.35px;
+  z-index: 1;
+  margin-top: 26px;
+}
+
+.top_banner .logo_wrap .logo_text {
+  font-family: Golos Text;
+  font-size: 16.65px;
+  font-weight: 700;
+  line-height: 17.98px;
+  text-align: left;
+  color: #595653;
+  text-transform: uppercase;
+}
+
+.heading_main {
+  font-family: Merriweather;
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 66px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.top_banner .heading_main.__mid {
+  text-align: center;
+}
+
+.top_banner .heading_main.__bottom {
+  text-align: right;
+}
+
+.top_banner .banner_text {
+  max-width: 542px;
+  margin-top: 62px;
+}
+
+.top_banner .banner_subtext {
+  font-family: Golos Text;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 23.4px;
+  text-align: center;
+  color: #313131;
+  margin-top: 24px;
+}
+
+.top_banner .buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.top_banner .buttons .btn {
+  background: none;
+  border: 2px solid #1F1F1F;
+  border-radius: 66px;
+  padding: 13.2px 49px;
+  flex: 1;
+  text-align: center;
+  font-family: Golos Text;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20.8px;
+  color: #1F1F1F;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.top_banner .buttons .btn:hover {
+  background-color: #1f1f1f;
+  color: #fff;
+}
+
+.top_banner .buttons .btn.__black {
+  background-color: #1F1F1F;
+  color: #fff;
+}
+
+.top_banner .buttons .btn.__black:hover {
+  background-color: var(--yellow, #FBCE51);
+  color: #1f1f1f;
+  border: 2px solid var(--yellow, #FBCE51);
 }
 
 @media (max-width: 850px) {

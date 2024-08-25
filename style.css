@@ -4,6 +4,7 @@
   --yellow: #FBCE51;
   --orange: #F54932;
   --beige: #E9DED4;
+  color: #313131;
 }
 
 @font-face {
@@ -48,6 +49,7 @@
   font-weight: 400;
   line-height: 64.8px;
   text-transform: uppercase;
+  color: #313131;
 }
 
 .participants {
@@ -65,10 +67,18 @@
   color: #838383;
   min-width: 35px;
   text-align: center;
+  display: flex;
+  gap: 1px;
 }
 
 .participants .counter .current {
   color: #313131;
+  min-width: 12px;
+  flex-shrink: 0;
+}
+
+.participants .counter .total {
+  min-width: 12px;
 }
 
 .participants .name {
@@ -78,6 +88,7 @@
   line-height: 28.8px;
   margin-top: 28px;
   text-align: center;
+  color: #313131;
 }
 
 .participants .sub {
@@ -106,11 +117,12 @@
   transition: background-color 0.2s, color 0.2s;
 }
 
-.participants .learn_more:hover {
-  background-color: var(--blue, #3057A2);
-  color: #fff;
+@media screen and (hover: hover) {
+  .participants .learn_more:hover {
+    background-color: var(--blue, #3057A2);
+    color: #fff;
+  }
 }
-
 .participants .page_ctl_wrap {
   margin-left: auto;
   display: flex;
@@ -130,10 +142,11 @@
   transition: fill 0.2s;
 }
 
-.page_ctl:hover:not(:disabled) circle {
-  fill: var(--yellow, #FBCE51);
+@media screen and (hover: hover) {
+  .page_ctl:hover:not(:disabled) circle {
+    fill: var(--yellow, #FBCE51);
+  }
 }
-
 
 .participants .participant {
   display: flex;
@@ -290,6 +303,7 @@
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
+  color: #313131;
 }
 
 .transform_stages .card .text {
@@ -298,6 +312,7 @@
   font-weight: 500;
   line-height: 24px;
   text-align: left;
+  color: #313131;
 }
 
 .transform_stages .card.__tall {
@@ -503,6 +518,7 @@
   top: 0;
   min-width: 1920px;
   width: 100%;
+  height: 100%;
 }
 
 .top_banner .background .chess_piece {
@@ -564,6 +580,7 @@
   line-height: 66px;
   text-align: left;
   text-transform: uppercase;
+  color: #313131;
 }
 
 .top_banner .heading_main.__mid {
@@ -611,20 +628,37 @@
   transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
-.top_banner .buttons .btn:hover {
-  background-color: #1f1f1f;
-  color: #fff;
-}
-
 .top_banner .buttons .btn.__black {
   background-color: #1F1F1F;
   color: #fff;
 }
 
-.top_banner .buttons .btn.__black:hover {
-  background-color: var(--yellow, #FBCE51);
-  color: #1f1f1f;
-  border: 2px solid var(--yellow, #FBCE51);
+
+@media screen and (hover: hover) {
+  .top_banner .buttons .btn.__black:hover {
+    background-color: var(--yellow, #FBCE51);
+    color: #1f1f1f;
+    border: 2px solid var(--yellow, #FBCE51);
+  }
+
+  .top_banner .buttons .btn:hover {
+    background-color: #1f1f1f;
+    color: #fff;
+  }
+}
+
+.footer {
+  background-color: var(--beige, #E9DED4);
+}
+
+.footer .footer_text {
+  font-family: Golos Text;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  color: #7b7672;
+  padding-top: 40px;
+  padding-bottom: 72px;
 }
 
 @media (max-width: 850px) {
@@ -667,5 +701,95 @@
 
   .running_line {
     padding: 10px 0;
+  }
+
+  .footer .footer_text {
+    padding-bottom: 60px;
+  }
+
+  .top_banner {
+    min-height: 774px;
+  }
+
+  .top_banner .city {
+    transform: none;
+    left: unset;
+    right: -73px;
+    min-height: 373px;
+    min-width: 850px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .top_banner .background .chess_piece {
+    display: none;
+  }
+
+  .top_banner .background .horse {
+    left: unset;
+    right: 141px;
+    width: 76.71px;
+    height: auto;
+    bottom: -14.4px;
+    transform: rotate(-10.59deg)
+  }
+
+  .top_banner .banner_text {
+    margin-top: 40px;
+    max-width: unset;
+  }
+
+  .top_banner .banner_subtext {
+    text-align: left;
+  }
+
+  .top_banner .banner_subtext br {
+    display: none;
+  }
+
+  .heading_main {
+    font-size: 36px;
+    line-height: 39.6px;
+    max-width: 335px;
+  }
+
+  .top_banner .buttons {
+    flex-direction: column;
+    margin-top: 32px;
+    gap: 14px;
+  }
+
+  .top_banner .buttons .btn {
+    width: 100%;
+    padding: 13.1px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+  }
+
+  @media (hover: hover) {
+    .top_banner .buttons .btn.__black:hover {
+      border: none;
+    }
+  }
+
+  .top_banner .logo_wrap {
+    margin-top: 18px;
+  }
+
+  .top_banner .logo_wrap .logo_text {
+    font-size: 14.42px;
+    line-height: 15.57px;
+  }
+
+  .top_banner .logo_wrap .logo {
+    width: 79.5px;
+    object-fit: contain;
+  }
+}
+
+@media screen and (max-width: 345px) {
+  .top_banner .heading_main.__mid, 
+  .top_banner .heading_main.__bottom {
+    text-align: left;
   }
 }

@@ -11,7 +11,6 @@ const init_participants = () => {
     const page_width = window.innerWidth;
     
     // These values must match the CSS rules
-    // TODO(vf): set propper page width values
     if (page_width > 1200) {
       return 3;
     } else if (page_width > 700) {
@@ -103,7 +102,6 @@ const init_participants = () => {
 
 
     const goto_next_page = () => {
-      console
       if (!btn_lockout) {
         let current_page = parseInt(slider_el.dataset.current) + 1;
         update_slider_pos(current_page);
@@ -219,7 +217,7 @@ const init_transform_stages = () => {
     check_mobile(cards);
 
     // Prevent firefox from keeping button state after reload
-    // next_btn.disabled = false;
+    next_btn.disabled = false;
     prev_btn.disabled = true;
 
     next_btn.addEventListener("click", () => {

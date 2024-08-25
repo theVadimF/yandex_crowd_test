@@ -30,12 +30,10 @@
           </p>
           <div class="buttons">
             <a href="" class="btn __black">
-              Поддержать <br>
-              шахматную мысль 
+              Поддержать шахматную мысль 
             </a>
             <a href="" class="btn">
-              Подробнее <br>
-              о турнире
+              Подробнее о турнире
             </a>
           </div>
         </div>
@@ -44,7 +42,10 @@
         <img src="./img/chess_horse.webp" alt="" class="horse">
         <img src="./img/chess_piece.webp" alt="" class="chess_piece">
         <img src="./img/grunge.webp" alt="" class="texture">
-        <img src="./img/city.webp" alt="" class="city">
+        <picture>
+          <source srcset="./img/city_m.webp, ./img/city_m_2x.webp 2x" media="(max-width: 850px)">
+          <img src="./img/city.webp" alt="" class="city">
+        </picture>
       </div>
     </div>
     <div class="running_line">
@@ -257,6 +258,16 @@
         <span class="line">Лед тронулся, господа присяжные заседатели!</span>
       </div>
     </div>
+
+    <footer class="footer">
+      <div class="content-wrap">
+        <p class="footer_text">
+          Все персонажи, события и цитаты являются вымышленными и не принадлежат создателям 
+          сайта. С подробностями можно познакомиться в главе XXXIV романа Ильи Ильфа и Евгения 
+          Петрова «Двенадцать стульев».
+        </p>
+      </div>
+    </footer>
 
   </body>
   <script src="./script.js"></script>

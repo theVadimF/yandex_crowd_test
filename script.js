@@ -253,7 +253,23 @@ const init_transform_stages = () => {
   })
 }
 
+init_top_buttons = () => {
+  const lecture_btn = document.getElementById("lecture_btn");
+  const more_info_btn = document.getElementById("more_info_btn");
+  const lecture_block = document.getElementById("lecture_block");
+  const info_block = document.getElementById("info_block");
+
+  lecture_btn.addEventListener("click", () => {
+    lecture_block.scrollIntoView({ behavior: "smooth" });
+  })
+
+  more_info_btn.addEventListener("click", () => {
+    info_block.scrollIntoView({ behavior: "smooth", block: "center" });
+  })
+}
+
 ready(() => {
   init_transform_stages();
   init_participants();
+  init_top_buttons();
 })
